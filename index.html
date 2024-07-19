@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tinder Swipe</title>
+</head>
+<style>
+    *, *::before, *::after{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;       
+    }
+
+    body{
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        display: grid;
+        place-content: center;
+        min-height: 100vh;
+        overflow: hidden;
+        user-select: none;
+        background: #a3a2a2;
+        
+    }
+
+    main{
+        background: url('images/phone2.svg') no-repeat;
+        width: 500px;
+        height: 600px;
+        background-size:contain;
+        display: flex;
+        filter: drop-shadow(0 0 8px rgba(0,0,0,0.3));
+    }
+
+    img{
+        width: 30%;
+    }
+
+    section{
+        background: #f6f6f6;
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        position: relative;
+        padding: 14px 6px;
+        margin: 45px 155px 145px 155px;
+        gap: 4px;
+
+        header{
+            display: flex;
+            justify-content: center;
+            
+            & img{
+                width: 25%;
+            }
+        }
+    
+        footer{
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0px;
+            padding: 2px 10px;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+    
+            & button{
+                background: url('images/icons_tinder.jpg');
+                background-position: -4px -305px;
+                background-size: 200px;
+                height: 26px;
+                width: 25x;
+                border-radius: 50%;
+                border: 0;
+                cursor: pointer;
+                transition: scale .3s ease;
+    
+                &:hover{
+                scale: 1.4;
+                }
+    
+                &.is-big{
+                width: 32px;
+                height: 32px;
+                background-size: 300px;
+                background-position: -15px 240px;
+                }
+
+                &.is-undo{
+                    background-position: 36px -8px;
+                }
+
+                &.is-fav{
+                    background-position: 107px -15px;
+                }
+                &.is-star{
+                    background-position: 116px -8px;
+                }
+
+                &.is-remove{
+                    background-position: 225px -16px;
+                }
+
+                &.is-zap{
+                    background-position: 395px -8px;
+                }
+
+              
+
+
+            }
+        }
+    }
+
+    
+
+    .card{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+
+        & > span{
+            display: grid;
+            place-content: center;
+            color: #777;
+            font-size: 14px;
+            text-align: center;
+            height: 100%;
+            z-index: -1;
+
+        }
+
+        & article{
+            background: black;
+            border-radius:  8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            cursor: grab;
+            overflow: hidden;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+
+            &.go-left{
+                transform: translateX(-150%) rotate(-30deg) !important;
+            }
+
+            &.go-right{
+                transform: translateX(150%) rotate(30deg) !important;
+            }
+            &.go-left, .go-right{
+                transition: trasnform .3s ease, rotate .3s ease;
+            }
+
+            &.reset{
+                transition: transform .3s ease;
+                transform: translateX(0) !important;
+            }
+
+            & .choice{
+                color: black;
+                border: 3px solid;
+                z-index: 9999;
+                position: absolute;
+                top: 16px;
+                right: 16px;
+                padding: 4px 8px;
+                font-size: 16px;
+                font-weight: bold;
+                text-shadow: 0 0 10 rgba(0,0,0,0.3);
+                width: fit-content;
+                opacity: 0;
+                &.nope{
+                    border-color: red;
+                    color: red;
+                    color: rgb(255, 52, 52);
+                    transform: rotate(30deg);
+                    right: 2px;
+                    
+                }
+
+                &.like{
+                    border-color: green;
+                    color: rgb(57, 255, 57);
+                    color: rgb(45, 255, 45);
+                    transform: rotate(-30deg);
+                    left: 2px;
+                    
+                }
+            }
+
+            & img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            & h2{
+                color: white;
+                position: absolute;
+                inset: 0;
+                display: flex;
+                align-items: flex-end;
+                height: 100%;
+                width: 100%;
+                padding: 10px;
+                z-index: 3;
+                background: linear-gradient(to top, #000 5%, transparent 20%);
+
+            }
+
+            & span{
+                margin-left: 8px;
+                font-size: 18px;
+                line-height: 1.4;
+                font-weight: 400;
+            }
+
+        }
+    }
+
+</style>
+<body>
+    <main>
+        <section>
+            <header>
+                <img class="img" src="images/logo_tinder3.jpg" alt="">
+            </header>
+            <div class="card">
+                  
+                    
+                <article>
+                    <img src="images/WhatsApp Image 2023-08-10 at 11.46.37 AM.jpeg" alt="">
+                    <h2>Andrés<span>28</span></h2>
+                    <div class="choice nope">NOPE</div>
+                    <div class="choice like">LIKE</div>
+                </article>
+
+                <article>
+                    <img src="images/myself.jpg" alt="">
+                    <h2>Andrés <span>29</span></h2>
+                    <div class="choice nope">NOPE</div>
+                    <div class="choice like">LIKE</div>
+                </article>
+
+                <span>
+                    No hay más personas cerca de ti.... <br>
+                    vuelve a intentarlo más tarde
+                </span>
+
+            </div>
+            <footer>
+                <button class="is-undo" aria-label="undo"></button>
+                <button class="is-remove is-big" aria-label="remove"></button>
+                <button class="is-star" aria-label="star"></button>
+                <button class="is-fav is-big" aria-label="fav"></button>
+                <button class="is-zap" aria-label="zap"></button>
+                
+            </footer>
+        </section>
+    </main>
+    <script>
+    const DECISION_THRESHOLD = 80
+    let isAnimating = false
+    let pullDeltaX = 0 // disntance de la card se está arrastrando
+
+    function startDrag(e){
+        if(isAnimating) return
+        
+        // get the first article alement
+        const actualCard = e.target.closest('article')
+        if (!actualCard) return
+
+        // get initial position of mouse or finger
+        const startX = e.pageX ?? e.touches[0].pageX
+        // listen the mouse and touch movements
+        document.addEventListener('mousemove', onMove)
+        document.addEventListener('mouseup', onEnd)
+
+        document.addEventListener('touchmove', onMove, {passive: true})
+        document.addEventListener('touchend', onEnd, {passive: true})
+        
+
+       
+
+        function onMove(e){
+            // current position of mouse or finger
+            const currentX = e.pageX ?? e.touches[0].pageX
+            // distance between initial and current position
+            pullDeltaX = currentX - startX
+            // there´s not distance recorrida
+            if (pullDeltaX === 0) return
+            //change the flag to indicate we are animating
+            isAnimating = true
+            // calculate the rotation of the card using the distance
+            const deg = pullDeltaX / 13
+            // apply the transformation to the card
+            actualCard.style.transform = `translateX(${pullDeltaX}px) rotate(${deg}deg)`
+            //change the cursor the grabbing
+            actualCard.style.cursor = 'grabbing'
+
+            // change opacity of the choice info
+            const opacity = Math.abs(pullDeltaX) / 100
+            const isRight = pullDeltaX > 0
+
+            const choiceEl = isRight
+            ? actualCard.querySelector('.choice.like')
+            : actualCard.querySelector('.choice.nope')
+
+            choiceEl.style.opacity = opacity
+
+        }
+
+        function onEnd(e){
+            document.removeEventListener('mousemove', onMove)
+            document.removeEventListener('mouseup', onEnd)
+
+            document.removeEventListener('touchmove', onMove)
+            document.removeEventListener('touchend', onEnd)
+
+           // Saber si el usuario tomó una decisión
+
+           const decisionMade = Math.abs(pullDeltaX) >= DECISION_THRESHOLD
+
+           if(decisionMade){
+             const goRight = pullDeltaX >= 0
+             const goLeft = !goRight
+             
+             actualCard.classList.add(goRight ? 'go-right' : 'go-left')
+             actualCard.addEventListener('transitionend', () => {
+             actualCard.remove()
+             }, {once: true})
+           }else{
+            actualCard.classList.add('reset')
+            actualCard.classList.remove('go-right', 'go-left')
+            actualCard.querySelectorAll('.choice').forEach(e => {
+                e.style.opacity = 0
+            })
+
+           }
+           // reset varibales
+           actualCard.addEventListener('transitionend', () => {
+            actualCard.removeAttribute('style')
+            actualCard.classList.remove('reset')
+
+            pullDeltaX = 0
+            isAnimating = false
+
+           })
+        } 
+    }
+    document.addEventListener('mousedown', startDrag)
+    document.addEventListener('touchstart', startDrag, {passive: true})
+
+</script>
+</body>
+
+</html>
